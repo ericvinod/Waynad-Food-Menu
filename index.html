@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wayanad Food Plan · Meghamalhar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9eee8;--card:#f8faf6;--ink:#1d2a23;--mut:#5b6a61;--moss:#2c5a47;--cof:#6a4025;--gold:#b88a2e;--line:#cfd8cd;--v:#3f8a52;--n:#9a4a2a;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141b17;--card:#1d2722;--ink:#e8eee8;--mut:#93a39a;--moss:#7fc3a2;--cof:#d2a27c;--gold:#e0b657;--line:#33423a;--v:#6fcf86;--n:#e58f6c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141b17;--card:#1d2722;--ink:#e8eee8;--mut:#93a39a;--moss:#7fc3a2;--cof:#d2a27c;--gold:#e0b657;--line:#33423a;--v:#6fcf86;--n:#e58f6c;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif}
+.w{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font:800 clamp(30px,6vw,52px)/1.05 Fraunces,Georgia,serif;margin:0 0 6px;color:var(--moss)}
+h2{font:600 22px Fraunces,Georgia,serif;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 18px}
+.hero{display:grid;gap:14px;grid-template-columns:1.2fr 1fr}
+@media(max-width:700px){.hero{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.big{font:800 clamp(40px,9vw,64px)/1 Fraunces,Georgia,serif;color:var(--cof)}
+.rng{display:flex;gap:10px;align-items:center;margin-top:10px;color:var(--mut);font-size:14px}
+.rng input{flex:1;accent-color:var(--moss)}
+.fam{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.fam:last-child{border:0}.fam b{font-variant-numeric:tabular-nums}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:20px 0 14px;padding-bottom:4px}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--moss);color:var(--bg);border-color:var(--moss)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{display:grid;grid-template-columns:130px 1fr 80px;gap:8px;align-items:center;margin:7px 0;font-size:14px}
+.bar i{display:block;height:14px;border-radius:7px;background:var(--moss)}
+.bar span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.row{display:grid;grid-template-columns:10px 1fr auto 70px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.row small{display:block;color:var(--mut)}
+.dot{width:10px;height:10px;border-radius:50%}
+.q{display:flex;align-items:center;gap:6px}
+.q button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:18px;cursor:pointer}
+.q b{min-width:24px;text-align:center}
+.amt{text-align:right;font-variant-numeric:tabular-nums}
+.tot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-weight:600;gap:10px;flex-wrap:wrap}
+.cp{border:1px solid var(--moss);background:none;color:var(--moss);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+.leg{display:flex;gap:14px;font-size:13px;color:var(--mut);margin-bottom:6px}
+ul.t{padding-left:18px;margin:0}ul.t li{margin:7px 0}
+.st{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.st input{margin-top:5px;accent-color:var(--moss);width:18px;height:18px}
+.st span:last-child{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+.top{display:flex;justify-content:space-between;align-items:start;gap:10px}
+</style></head><body><div class="w">
+<div class="top"><div><h1>Wayanad food plan</h1><p class="sub">Meghamalhar stay · 26–29 Dec · 9 adults + 7 kids · prices from Queen-C Restaurant menu</p></div>
+<button class="cp" id="th" aria-label="Toggle theme">Theme</button></div>
+<div id="app"></div></div>
+<script>
+const V='V',N='N',A='A';
+// [item, price ₹, qty, who eats (V=Family 5 veg, N=Families 1-4, A=everyone), note]
+const M=[
+{t:'26 Dec · Dinner',r:[['Chappathi',14,8,V],['Dal Tadka',140,1,V],['Paneer Butter Masala',220,1,V],['Veg Biriyani',130,1,V],
+['Porotta',15,16,N],['Butter Chicken',240,2,N],['Beef Curry',200,2,N],['Chicken Biriyani',190,3,N],['Egg Fried Rice',180,2,N,'Mild option for the 6 kids'],['Fresh Lime',25,10,A]]},
+{t:'27 Dec · Breakfast',r:[['Appam',15,8,V],['Veg Kuruma',120,1,V],['Appam',15,12,N],['Porotta',15,10,N],['Egg Masala',85,3,N],['Malabar Chicken Curry',160,2,N],['Omelette',45,4,N,'For the kids'],['Tea',15,9,A],['Boost',25,7,A,'Kids']]},
+{t:'27 Dec · Lunch',r:[['Meals',90,3,V],['Gobi Manchurian',180,1,V],['Meals',90,10,N,'7 adults + kids sharing'],['Beef Fry',190,2,N],['Chicken 65',200,2,N,'Kid favourite'],['Fresh Lime',25,10,A]]},
+{t:'27 Dec · Dinner',r:[['Veg Makhani',220,1,V],['Chappathi',14,6,V],['Veg Pulao',160,1,V],['Al Faham Mandi · Normal (Full)',740,2,N,'Pre-order 2–3 hrs ahead'],['Chicken 65',200,2,N],['Garden Salad',110,2,A]]},
+{t:'28 Dec · Breakfast',r:[['Porotta',15,6,V],['Veg Kadai',130,1,V],['Puri',15,14,N],['Pathal',15,8,N],['Egg Burji',60,2,N],['Egg Masala',85,2,N],['Tea',15,9,A],['Boost',25,7,A,'Kids']]},
+{t:'28 Dec · Lunch',r:[['Veg Fried Rice',160,1,V],['Gobi Manchurian',180,1,V],['Veg Noodles',160,1,V],['Chatti Choru',190,4,N],['Chicken Fried Rice',220,2,N],['Chicken Chilly',220,2,N],['Fresh Lime',25,10,A]]},
+{t:'28 Dec · Dinner',r:[['Chappathi',14,8,V],['Mushroom Masala',210,1,V],['Dal Lehsuni',160,1,V],['Veg Biriyani',130,1,V],['Porotta',15,16,N],['Beef Roast',220,2,N],['Chicken Korma',240,1,N],['Al Faham Kondattam (Full)',650,1,N],['Chicken Biriyani',190,2,N],['Strawberry Falooda',180,4,A,'Kids + a few adults share']]},
+{t:'29 Dec · Breakfast',r:[['Appam',15,8,V],['Veg Kuruma',120,1,V],['Appam',15,12,N],['Porotta',15,8,N],['Egg Masala',85,3,N],['Malabar Chicken Curry',160,2,N],['Tea',15,9,A],['Boost',25,7,A,'Kids']]}
+].map(m=>({...m,r:m.r.map(x=>({n:x[0],p:x[1],q:x[2],g:x[3],note:x[4]||'',q0:x[2]}))}));
+const F=[['Family 1',2,1,N],['Family 2',1,1,N],['Family 3',2,2,N],['Family 4',2,2,N],['Family 5 (veg)',2,1,V]].map(f=>({n:f[0],e:f[1]+f[2]*.5,g:f[3]}));
+const eqN=F.filter(f=>f.g==N).reduce((s,f)=>s+f.e,0),eqAll=eqN+2.5;
+const S=[['Drinking water cans (20 L ×2)','Rain-fed hills, safe for kids',300],['Milk (2 L)','Kids’ Boost/Horlicks, tea, midnight cravings',130],['Wayanad coffee + tea powder','Rainy-evening coffee on the veranda',250],['Eggs (1 dozen)','Backup for omelettes or kids’ breakfast',90],['Bread + butter + jam','Quick fallback if the restaurant is late',200],['Bananas, apples, oranges (3 kg)','Cut-fruit snack; the 5–9 yr olds will graze',350],['Curd (1 L)','Cooling side with spicy dinners',70],['Banana chips, biscuits, rusks','Tea-time snacks and travel snacks',350],['Boost / Horlicks sachets','If the restaurant hot drinks run out',100],['Ice cream tubs (2)','Dessert without a late-night trip (kids’ treat)',300],['ORS + glucose biscuits','Travel tummy or rain-chill backup',80]];
+const tips=['Call the restaurant the evening before: confirm breakfast timings, delivery or pickup, and pre-order the Mandi and Al Faham (they take time).','Family 5 is strictly veg: ask for separate packing and separate serving spoons, and keep their bag labelled “VEG”.','Fish is “seasonal” on the menu with no fixed price, so it is left out of the estimate. Ask for the day’s price and add it if wanted.','Biriyani shows two prices (130/190, 150/200). We assumed regular/large and used the larger for sharing. Al Faham and Mandi are quarter/half/full; we used “Full” (about 3–4 adults).','Ask for mild spice on kids’ dishes (Chicken 65, fried rice) and send chilly items separately.','Collect meals in the stay’s fridge only if eaten within 24 hours; reheat Mandi and biriyani thoroughly.','Wayanad evenings get cool and wet. Carry insulated food bags if the restaurant is a drive away, and keep a few small bills for delivery tips.'];
+let tab='ov',buf=8,theme=null;const st=S.map(()=>true);
+const R=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+const mealSub=m=>m.r.reduce((s,x)=>s+x.p*x.q,0);
+function fam(){return F.map(f=>{let c=0;M.forEach(m=>m.r.forEach(x=>{const v=x.p*x.q;if(x.g==V&&f.g==V)c+=v;else if(x.g==N&&f.g==N)c+=v*f.e/eqN;else if(x.g==A)c+=v*f.e/eqAll}));return c*(1+buf/100)})}
+function render(){
+ const sub=M.reduce((s,m)=>s+mealSub(m),0),tot=sub*(1+buf/100),fc=fam();
+ const tabs=[['ov','Overview'],...M.map((m,i)=>[i,m.t.replace(' Dec','')]),['S','Stock-up'],['T','Order tips']];
+ let h=`<div class="hero"><div class="card"><div class="sub" style="margin:0">Estimated total, all 8 meals</div><div class="big">${R(tot)}</div>
+ <div class="sub" style="margin:4px 0 0">${R(tot/16)} per head · food ${R(sub)} + buffer</div>
+ <label class="rng">Buffer for tax, packing, extras: <b>${buf}%</b><input type="range" min="0" max="20" value="${buf}" oninput="buf=+this.value;render()" aria-label="Buffer percent"></label></div>
+ <div class="card"><h2>Suggested split by family</h2>${F.map((f,i)=>`<div class="fam"><span>${f.n}</span><b>${R(fc[i])}</b></div>`).join('')}</div></div>
+ <div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button role="tab" aria-selected="${k===tab}" onclick="tab=${typeof k=='number'?k:`'${k}'`};render()">${l}</button>`).join('')}</div>`;
+ if(tab=='ov'){const mx=Math.max(...M.map(mealSub));
+  h+=`<div class="card"><h2>Cost by meal</h2>${M.map(m=>`<div class="bar"><span>${m.t}</span><span><i style="width:${mealSub(m)/mx*100}%"></i></span><span>${R(mealSub(m))}</span></div>`).join('')}
+  <p class="sub" style="margin-top:12px">Split logic: veg dishes go to Family 5; non-veg to Families 1–4 by adults (1) and kids (0.5); shared items across all. Kids are planned at half portions. Tap any meal to change quantities.</p></div>`}
+ else if(typeof tab=='number'){const m=M[tab];
+  h+=`<div class="card"><h2>${m.t}</h2><div class="leg"><span style="color:var(--v)">● Veg (Family 5)</span><span style="color:var(--n)">● Non-veg (Families 1–4)</span><span style="color:var(--gold)">● Everyone</span></div>`;
+  m.r.forEach((x,j)=>{h+=`<div class="row"><span class="dot" style="background:var(--${x.g==V?'v':x.g==N?'n':'gold'})"></span><div>${x.n}<small>${R(x.p)} each${x.note?' · '+x.note:''}</small></div><div class="q"><button onclick="ch(${tab},${j},-1)" aria-label="Less ${x.n}">−</button><b>${x.q}</b><button onclick="ch(${tab},${j},1)" aria-label="More ${x.n}">+</button></div><div class="amt">${R(x.p*x.q)}</div></div>`});
+  h+=`<div class="tot"><span>Meal total ${R(mealSub(m))}</span><button class="cp" onclick="cpy(${tab})">Copy order for WhatsApp</button></div></div>`}
+ else if(tab=='S'){const c=S.reduce((s,x,i)=>s+(st[i]?x[2]:0),0);
+  h+=`<div class="card"><h2>Ask the caretaker to stock the fridge</h2><p class="sub">Approximate local prices. Untick what you don’t need.</p>${S.map((x,i)=>`<label class="st"><input type="checkbox" ${st[i]?'checked':''} onchange="st[${i}]=this.checked;render()"><span><b>${x[0]}</b><br><small style="color:var(--mut)">${x[1]}</small></span><span>${R(x[2])}</span></label>`).join('')}<div class="tot"><span>Stock-up estimate</span><span>${R(c)}</span></div><p class="sub">Not included in the restaurant total above.</p></div>`}
+ else h+=`<div class="card"><h2>Ordering tips</h2><ul class="t">${tips.map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+ document.getElementById('app').innerHTML=h}
+function ch(i,j,d){const x=M[i].r[j];x.q=Math.max(0,x.q+d);render()}
+function cpy(i){const m=M[i],t=m.t+'\n'+m.r.filter(x=>x.q).map(x=>x.q+' × '+x.n).join('\n');navigator.clipboard&&navigator.clipboard.writeText(t).then(()=>alert('Order copied')).catch(()=>prompt('Copy:',t))}
+document.getElementById('th').onclick=()=>{const d=document.documentElement,dark=(d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches);d.dataset.theme=dark?'light':'dark'};
+render();
+</script></body></html>
